@@ -18,7 +18,7 @@ router.get('/signup', (req, res) => res.render('auth/signup'));
 
 // .post() route ==> to process form data
 router.post('/signup', (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, profilePicture } = req.body;
 
   if (!username || !email || !password) {
     res.render('auth/signup', { errorMessage: 'All fields are mandatory. Please provide your username, email and password.' });
@@ -45,7 +45,8 @@ router.post('/signup', (req, res, next) => {
         // passwordHash => this is the key from the User model
         //     ^
         //     |            |--> this is placeholder (how we named returning value from the previous method (.hash()))
-        passwordHash: hashedPassword
+        passwordHash: hashedPassword,
+        profilePicture
       });
     })
     .then(userFromDB => {
